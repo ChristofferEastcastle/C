@@ -1,20 +1,19 @@
 #include <stdio.h>
-#include <string.h>
+#include <math.h>
 
 int main(){
-    int n, p, q;
-    scanf("%d %d %d", &n, &p, &q);
+    double n, p, q;
+    scanf("%lf %lf %lf", &n, &p, &q);
 
-    int counter = 0;
+    p /= n;
+    q /= n;
+    
+    double out = fmod((p + q), 2);
+    
+    if (out >= 0 && out < 1)
+        printf("paul");
+    else 
+        printf("opponent");
 
-    char str[10];
-
-    for (int i = 0; i < p + q; i++){
-        if (i % n == 1 && i % n < n){
-            strcpy(str, "paul");
-        }else{
-            strcpy(str, "opponent");
-        }
-    }
-    printf("%s", str);
+    return 0;
 }
