@@ -26,7 +26,7 @@ int main(){
         for (int k = 0; k < m; k++){
             char str[11];
             scanf("%s", str);
-            int index = keyExists(str, arr, 20);
+            int index = keyExists(str, arr, n * m);
             if (index != -1){
                 arr[index].value++;
             }else{
