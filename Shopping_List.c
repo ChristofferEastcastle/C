@@ -3,7 +3,7 @@
 
 typedef struct Item
 {
-    char key[11];
+    char key[12];
     int value;
 } Item;
 
@@ -18,15 +18,15 @@ int keyExists(char str[], Item arr[], int size){
 
 int main(){
     int n, m;
-    scanf("%d%d", &n, &m);
-    struct Item arr[20];
+    scanf("%d %d", &n, &m);
+    struct Item arr[n * m];
 
     int arr_counter = 0;
     for (int i = 0; i < n; i++){
-        for (int k = 0; k < 5; k++){
-            char str[15];
+        for (int k = 0; k < m; k++){
+            char str[11];
             scanf("%s", str);
-            int index = keyExists(str, arr, 20);
+            int index = keyExists(str, arr, n * m);
             if (index != -1){
                 arr[index].value++;
             }else{
@@ -39,7 +39,7 @@ int main(){
         }
     }
     int counter = 0;
-    struct Item everyList[20];
+    struct Item everyList[n * m];
     for (int i = 0; i < arr_counter; i++){
         if (arr[i].value == n){
             everyList[counter] = arr[i];
@@ -47,13 +47,14 @@ int main(){
         }
     }
     //Sorting arr in alphabetically order
-    for(int i=0;i<=counter;i++){
-        for (int j=i+1;j<=counter;j++){
-            if (strcmp(everyList[i].key, everyList[j].key)>0){
-                char temp[11];
-                strcpy(temp, everyList[i].key);
-                strcpy(everyList[i].key,everyList[j].key);
-                strcpy(everyList[j].key,temp);
+    for(int i = 0 ; i < counter; i++){
+        for (int j = 0; j < counter - 1; j++){
+            if (strcmp(everyList[j].key, everyList[j + 1].key) > 0){
+                Item temp;
+                strcpy(temp.key, everyList[j].key);
+                temp.value = everyList[j].value;
+                everyList[j] = everyList[j + 1];
+                everyList[j + 1] = temp;
             }
         }
     }
@@ -64,4 +65,5 @@ int main(){
         else
             printf("%s", everyList[i].key);
     }
+    return 0;
 }
